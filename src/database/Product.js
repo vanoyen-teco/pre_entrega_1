@@ -5,6 +5,12 @@ const getAllProducts = () => {
   return DB.products;
 };
 
+const getProductById = (productId) => {
+    const id = parseInt(productId);
+    const element = getAllProducts().filter((item) => (item.id == id));
+    return (element.length < 1)?false:element;
+};
+
 const createNewProduct = (newProduct) => {
     const isAlreadyAdded =
         DB.products.findIndex((product) => product.name === newProduct.name) > -1;
@@ -32,9 +38,44 @@ const getLastId = () => {
         return false;
     }
 }
+const deleteOneProduct = (productId) => {
+    const indexForDeletion = DB.products.findIndex(
+        (product) => product.id === parseInt(productId)
+    );
+    if (indexForDeletion === -1) {
+        return false;
+    }
+    try {
+        DB.products.splice(indexForDeletion, 1);
+        saveToDatabase(DB);
+        return productId;
+    } catch (error) {
+        return false;
+    }  
+};
+
+const updateOneProduct = (productId, changes) => {
+    const indexForUpdate = DB.products.findIndex(
+        (product) => product.id === parseInt(productId)
+    );
+    if (indexForUpdate === -1) {
+        return false;
+    }
+    const updatedProduct = {
+        ...DB.products[indexForUpdate],
+        ...changes,
+        updatedAt: new Date().toLocaleString("es-ES"),
+    };
+    DB.products[indexForUpdate] = updatedProduct;
+    saveToDatabase(DB);
+    return updatedProduct;
+};
 
 module.exports = { 
     getAllProducts,
+    getProductById,
     createNewProduct,
+    updateOneProduct,
     getLastId,
+    deleteOneProduct,
 };

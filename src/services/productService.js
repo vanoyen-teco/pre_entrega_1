@@ -5,8 +5,7 @@ const getAllProducts = () => {
     return allProducts;
 };
 
-const getProductById = (id) => {
-    const productId = id; //validar
+const getProductById = (productId) => {
     const getProduct = Product.getProductById(productId);
     return getProduct;
 };
@@ -29,8 +28,25 @@ const createNewProduct = (newProduct) => {
     }
 };
 
+const updateOneProduct = (productId, changes) => {
+    try {
+        const updatedProduct = Product.updateOneProduct(productId, changes);
+        return updatedProduct;
+    } catch (error) {
+        return false;
+    }
+};
+
+const deleteOneProduct = (productId) => {
+    const deletedProduct = Product.deleteOneProduct(productId);
+    console.log(deletedProduct);
+    return deletedProduct;
+};
+
 module.exports = {
     getAllProducts,
     getProductById,
     createNewProduct,
+    updateOneProduct,
+    deleteOneProduct,
 };
