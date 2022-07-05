@@ -15,8 +15,7 @@ const createNewProduct = (newProduct) => {
     const productToInsert = {
         ...newProduct,
         id: lastId,
-        createdAt: new Date().toLocaleString("es-ES"),
-        updatedAt: new Date().toLocaleString("es-ES"),
+        timestamp: new Date().getTime(),
     };
     try {
         if(lastId){
@@ -39,7 +38,6 @@ const updateOneProduct = (productId, changes) => {
 
 const deleteOneProduct = (productId) => {
     const deletedProduct = Product.deleteOneProduct(productId);
-    console.log(deletedProduct);
     return deletedProduct;
 };
 

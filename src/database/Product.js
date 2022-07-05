@@ -1,5 +1,5 @@
-const DB = require("./products.json");
-const { saveToDatabase } = require("./tools");
+const DB = require("./productos.json");
+const { saveProuctToDatabase } = require("./tools");
 
 const getAllProducts = () => {
   return DB.products;
@@ -18,7 +18,7 @@ const createNewProduct = (newProduct) => {
         return;
     }
     DB.products.push(newProduct);
-    saveToDatabase(DB);
+    saveProuctToDatabase(DB);
     return newProduct;
 };
 
@@ -47,7 +47,7 @@ const deleteOneProduct = (productId) => {
     }
     try {
         DB.products.splice(indexForDeletion, 1);
-        saveToDatabase(DB);
+        saveProuctToDatabase(DB);
         return productId;
     } catch (error) {
         return false;
@@ -63,11 +63,10 @@ const updateOneProduct = (productId, changes) => {
     }
     const updatedProduct = {
         ...DB.products[indexForUpdate],
-        ...changes,
-        updatedAt: new Date().toLocaleString("es-ES"),
+        ...changes
     };
     DB.products[indexForUpdate] = updatedProduct;
-    saveToDatabase(DB);
+    saveProuctToDatabase(DB);
     return updatedProduct;
 };
 

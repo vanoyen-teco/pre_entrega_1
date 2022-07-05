@@ -1,9 +1,19 @@
 const fs = require("fs");
 
-const saveToDatabase = (DB) => {
-    fs.writeFileSync("./src/database/products.json", JSON.stringify(DB, null, 2), {
+const saveProuctToDatabase = (DB) => {
+    fs.writeFileSync("./src/database/productos.json", JSON.stringify(DB, null, 2), {
     encoding: "utf-8",
     });
 };
 
-module.exports = { saveToDatabase };
+const saveCartToDatabase = (DB) => {
+    fs.writeFileSync("./src/database/carritos.json", JSON.stringify(DB, null, 2), {
+    encoding: "utf-8",
+    });
+};
+
+
+module.exports = { 
+    saveProuctToDatabase,
+    saveCartToDatabase,
+};

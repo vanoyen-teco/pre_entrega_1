@@ -23,11 +23,12 @@ const getProducts = (req, res) => {
 const createNewProduct = (req, res) => {
     const { body } = req;
     if (
-        !body.name ||
-        !body.mode ||
-        !body.equipment ||
-        !body.exercises ||
-        !body.trainerTips
+        !body.nombre ||
+        !body.descripcion ||
+        !body.codigo ||
+        !body.foto ||
+        !body.precio ||
+        !body.stock
     ) {
         res
         .status(400)
@@ -41,11 +42,12 @@ const createNewProduct = (req, res) => {
         return;
     }
     const newProduct = {
-        name: body.name,
-        mode: body.mode,
-        equipment: body.equipment,
-        exercises: body.exercises,
-        trainerTips: body.trainerTips,
+        nombre: body.nombre,
+        descripcion: body.descripcion,
+        codigo: body.codigo,
+        foto: body.foto,
+        precio: body.precio,
+        stock: body.stock,
     };
     const createdProduct = productService.createNewProduct(newProduct);
     (createdProduct)
@@ -60,11 +62,12 @@ const updateOneProduct = (req, res) => {
         params: { id },
     } = req;
     if (
-        !body.name ||
-        !body.mode ||
-        !body.equipment ||
-        !body.exercises ||
-        !body.trainerTips ||
+        !body.nombre ||
+        !body.descripcion ||
+        !body.codigo ||
+        !body.foto ||
+        !body.precio ||
+        !body.stock ||
         !id
     ) {
         res
@@ -73,7 +76,7 @@ const updateOneProduct = (req, res) => {
             status: "FAILED",
             data: {
             error:
-                "Lo sentimos, no hemos recibido correctamente los campos requeridos. Revise la documentación. ---",
+                "Lo sentimos, no hemos recibido correctamente los campos requeridos. Revise la documentación.",
             },
         });
         return;
